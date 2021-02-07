@@ -1,0 +1,30 @@
+<dx-toolbar
+    [items]="toolbarContent">
+</dx-toolbar>
+<dx-drawer 
+    openedStateMode="shrink"
+    position="top"
+    revealMode="expand"
+    template="template"
+    [opened]="false"
+    [closeOnOutsideClick]="true">
+    <div *dxTemplate="let data of 'template'">
+        <!-- <dx-list class="panel-list dx-theme-accent-as-background-color"
+            [hoverStateEnabled]="false"
+            [activeStateEnabled]="false"
+            [focusStateEnabled]="false"
+            [dataSource]="navigation"
+            (onItemClick)="onItemClick($event)">
+        </dx-list> -->
+
+        <dx-button 
+        *ngFor="let item of navigation"
+        stylingMode="contained"
+        [text]="item.text"
+        type="normal"
+        [width]="120"
+        (onClick)="onItemClick(item)">
+    </dx-button>
+
+    </div>
+</dx-drawer>

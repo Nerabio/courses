@@ -1,0 +1,120 @@
+
+
+<form [formGroup]="form">
+
+  <div class="dx-fieldset">
+    <div class="dx-fieldset-header">Курс</div>
+    <div class="dx-field">
+        <div class="dx-field-label">Название</div>
+        <dx-text-box class="dx-field-value" formControlName="title"></dx-text-box>
+    </div>
+    <div class="dx-field">
+        <div class="dx-field-label">Описание</div>
+        <dx-text-area class="dx-field-value" formControlName="description" [height]="80"></dx-text-area>
+    </div>
+
+<div class="dx-field">
+  <div class="dx-field-label">Выбрать слушателей курса</div>
+  <div class="dx-field-value">
+      <dx-drop-down-box
+              [(value)]="gridBoxValue"
+              valueExpr="ID"
+              displayExpr="name"              
+              placeholder="Select a value..."
+              [showClearButton]="true"
+              [dataSource]="gridDataSource">
+
+          <div *dxTemplate="let data of 'content'">
+              <dx-data-grid
+                      [dataSource]="gridDataSource"
+                      keyExpr="ID"
+                      [columns]="columnsTemplate"                      
+                      [selection]="{ mode: 'multiple' }"
+                      [hoverStateEnabled]="true"
+                      [paging]="{ enabled: true, pageSize: 10 }"
+                      [filterRow]="{ visible: true }"
+                      [scrolling]="{ mode: 'infinite' }"
+                      [height]="345"
+                      [(selectedRowKeys)]="gridBoxValue"
+              >
+              </dx-data-grid>
+          </div>
+      </dx-drop-down-box>
+  </div>
+</div>  
+
+<div class="dx-field">
+  <div class="dx-field-label">Ведущий курса</div>
+  <div class="dx-field-value">
+      <dx-drop-down-box
+              [(value)]="gridBoxValue"
+              valueExpr="ID"
+              displayExpr="name"
+              [deferRendering]="false"
+              placeholder="Select a value..."
+              [showClearButton]="true"
+              [dataSource]="gridDataSource"
+      >
+
+          <div *dxTemplate="let data of 'content'">
+              <dx-data-grid
+                      [dataSource]="gridDataSource"
+                      keyExpr="ID"
+                      [columns]="['name']"
+                      [selection]="{ mode: 'single' }"
+                      [hoverStateEnabled]="true"
+                      [paging]="{ enabled: true, pageSize: 10 }"
+                      [filterRow]="{ visible: true }"
+                      [scrolling]="{ mode: 'infinite' }"
+                      [(selectedRowKeys)]="gridBoxValue"
+                      height="100%"
+              >
+              </dx-data-grid>
+          </div>
+      </dx-drop-down-box>
+  </div>
+</div>
+
+<div formGroupName="dates">
+  <div class="dx-field">
+    <div class="dx-field-label">Дата старта</div>
+    <div class="dx-field-value">
+      <dx-date-box
+      formControlName="dateStart"
+      placeholder="дд.мм.гггг"
+      type="date"
+      [ngStyle]="{'border-color': (f.dates.get('dateStart').touched && f.dates.get('dateStart').invalid) || f.dates.invalid ? 'red' : '#8E8E8E'}"
+      ></dx-date-box>
+      </div>
+  </div>
+
+  <div class="dx-field">
+    <div class="dx-field-label">Дата завершения</div>
+    <div class="dx-field-value">
+    <dx-date-box
+    formControlName="dateEnd"
+    placeholder="дд.мм.гггг"
+    type="date"
+    [ngStyle]="{'border-color': (f.dates.get('dateEnd').touched && f.dates.get('dateEnd').invalid) || f.dates.invalid ? 'red' : '#8E8E8E'}"
+    ></dx-date-box>
+  </div>
+  </div>
+</div>
+
+<dx-button
+stylingMode="contained"
+text="Сохранить"
+type="default"
+[width]="120"
+(onClick)="clickSave($event)">
+</dx-button>
+<dx-button
+stylingMode="contained"
+text="Отмена"
+type="danger"
+[width]="120"
+(onClick)="clickCancel($event)">
+</dx-button>
+
+</div> 
+</form>

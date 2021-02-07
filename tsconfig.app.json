@@ -2,8 +2,27 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true, 
     "outDir": "./out-tsc/app",
-    "types": []
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "types": [],
+    "paths": {
+      "globalize": [
+        "node_modules/globalize/dist/globalize"
+      ],
+      "globalize/*": [
+        "node_modules/globalize/dist/globalize/*"
+      ],
+      "cldr": [
+        "node_modules/cldrjs/dist/cldr"
+      ],
+      "cldr/*": [
+        "node_modules/cldrjs/dist/cldr/*"
+      ]
+    }
   },
   "files": [
     "src/main.ts",
